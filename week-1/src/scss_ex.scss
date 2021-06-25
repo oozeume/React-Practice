@@ -1,9 +1,16 @@
+$bgColor: yellow;
+// 변수 선언해놓고 쓰기
+
 .App{
     width: 100vw;
     min-height: 100vh;
-    background-color: #eee;
+    background-color: #{$bgColor};
     padding: 32px;
     box-sizing: border-box;
+
+    &:hover{
+        background-color: blue;
+    }
 }
 
 .container{
