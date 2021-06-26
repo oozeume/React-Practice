@@ -15,6 +15,15 @@ class App extends React.Component {
       this.state = {
          list: ['영화관 가기', '매일 책읽기', '수영 배우기'],
       };
+
+      this.text = React.createRef();
+      // 아래 render()에서 먼저 작성해줬음. text가져올꺼니까 text로 작성
+      // createRef()는 Ref 생성해주는 친구
+   }
+
+   componentDidMount(){
+      console.log(this.text);
+      console.log(this.text.current);
    }
 
    // 랜더 함수 안에 리액트 엘리먼트를 넣어줍니다!
@@ -31,6 +40,9 @@ class App extends React.Component {
                {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
                <BucketList list={this.state.list} />
             </Container>
+            <div>
+               <input type="text" ref={this.text}/>
+            </div>
          </AppBox>
       );
    }
