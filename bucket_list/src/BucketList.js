@@ -28,9 +28,8 @@ const BucketList = (props) => {
                 // 자세한 사용법은 아래 링크를 확인해주세요.
                 // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
                 my_lists.map((list, index) => {
-                    // 콘솔을 확인해봅시다 :)
                     return (
-                    <ItemStyle key={index}>
+                    <ItemStyle className='list_item' key={index} onClick={()=>{props.history.push('/detail')}}>
                         {list}
                     </ItemStyle>
                     );
