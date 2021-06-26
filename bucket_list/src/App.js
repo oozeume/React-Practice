@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 // BucketList 컴포넌트를 import 해옵니다.
 // import [컴포넌트 명] from [컴포넌트가 있는 파일경로];
 import BucketList from './BucketList';
 // import './style.css';
 // import "./scss_ex.scss";
-import styled from 'styled-component';
+import styled from 'styled-components';
 
 // 클래스형 컴포넌트는 이렇게 생겼습니다!
 class App extends React.Component {
@@ -24,20 +23,20 @@ class App extends React.Component {
       console.log(this.state);
 
       return (
-         <div className="App">
-            <div className="container">
-               <h1 className="title">내 버킷리스트</h1>
-               <hr className="line" />
+         <AppBox>
+            <Container>
+               <Title>내 버킷리스트</Title>
+               <Line />
                {/* 컴포넌트를 넣어줍니다. */}
                {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
                <BucketList list={this.state.list} />
-            </div>
-         </div>
+            </Container>
+         </AppBox>
       );
    }
 }
 
-const App = styled.div`
+const AppBox = styled.div`
    width: 100vw;
    min-height: 100vh;
    background-color: #{$bgColor};
