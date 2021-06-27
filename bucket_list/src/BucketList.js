@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-// 이렇게 쓸 수도 있어요. =>가 들어간 함수를 화살표 함수라고 불러요.
-// 저희는 앞으로 화살표 함수를 사용할거예요.
 // 앗 () 안에 props! 부모 컴포넌트에게 받아온 데이터입니다.
 // js 함수가 값을 받아오는 것과 똑같이 받아오네요.
 const BucketList = (props) => {

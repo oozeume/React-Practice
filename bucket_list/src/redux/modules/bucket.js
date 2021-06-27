@@ -5,6 +5,7 @@
 // type을 반드시 가지고있어야함
 const LOAD = "bucket/LOAD";
 const CREATE = "bucket/CREATE";
+const DELETE = "bucket/DELETE";
 
 // 기본값, 초기값의 데이터 (App.js에 있음)
 const initialState = {
@@ -21,6 +22,10 @@ export const createBucket = (bucket) => {
     return {type: CREATE, bucket};
 }
 
+export const deleteBucket = (bucket) => {
+    return {type: DELETE, bucket};
+}
+
 
 // Reducer
 // 현재상태(초기상태)와 전달받은 액션객체를 파라미터롤 받아와서 새로운 상태를 만들어서 반환한다. 
@@ -30,12 +35,18 @@ export default function reducer(state = initialState, action) {
         case "bucket/LOAD": {
             return state;
         }
-
         case "bucket/CREATE": {
             const new_bucket_list = [...state.list, action.bucket];
             return {list: new_bucket_list};
         }
-
+        case "bucket/DELETE": {
+            const bucket_list = state.list.filter((l, index) => { //페이지의 인덱스 사용해서 지워준다.
+                if(index !== action.bucket){
+                    return l;
+                }
+            });
+            return {list: bucket_list};
+        }
         default: 
             return state;
     }
