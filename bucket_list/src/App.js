@@ -1,15 +1,17 @@
 import React from 'react';
 
-import BucketList from './BucketList';
-import Detail from './Detail';
-import NotFound from './NotFound';
-import styled from 'styled-components';
-
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
+import BucketList from './BucketList';
+import Detail from './Detail';
+import NotFound from './NotFound';
+import Progress from './Progress';
+import styled from 'styled-components';
+
 // 리덕스 스토어와 연결하기 위한 connect 호출
 import { connect } from 'react-redux';
+// 리덕스 모듈에서 (bucket 모듈에서) 액션 생성함수 2개 가져온다
 import { loadBucket, createBucket } from './redux/modules/bucket';
 
 
@@ -37,7 +39,6 @@ class App extends React.Component {
         super(props);
         // App 컴포넌트의 state를 정의해줍니다.
         this.state = {
-
         };
 
         //Ref선언
@@ -47,15 +48,14 @@ class App extends React.Component {
         // input에 입력된 텍스트 가져오고싶어 -> 리액트 요소에서 가져온다.
     }
 
+    componentDidMount() {
+    }
+
     //Ref값 가져와서 연결해줄때 add해주는 함수 만들어줘야겠죠 (input에 text입력하고 추가하기 버튼 눌렀을때)
     addBucketList = () => {
         const new_item = this.text.current.value; // input에서 value값 가져오면 담아줄 변수를 만들어준다. 
         this.props.create(new_item);
     };
-
-    componentDidMount() {
-        console.log(this.props);
-    }
 
     // 랜더 함수 안에 리액트 엘리먼트를 넣어줍니다!
     render() {
@@ -63,6 +63,7 @@ class App extends React.Component {
             <AppBox>
                 <Container>
                     <Title>내 버킷리스트</Title>
+                    <Progress />
                     <Line />
 
                     <Switch>
@@ -82,10 +83,13 @@ class App extends React.Component {
 
                 </Container>
 
-                <TextContainer>
+                <Input>
                     <input type="text" ref={this.text} />
                     <button onClick={this.addBucketList}>추가하기</button>
-                </TextContainer>
+                </Input>
+                <button onClick={()=>{
+                    window.scrollTo({top: 0, left:0, behavior: 'smooth'});
+                }}>위로가기</button>
             </AppBox>
         );
     }
@@ -119,7 +123,7 @@ const Line = styled.hr`
    border: 1px dotted #ddd;
 `;
 
-const TextContainer = styled.div`
+const Input = styled.div`
    max-width: 350px;
    padding: 16px;
    margin: 20px auto;
