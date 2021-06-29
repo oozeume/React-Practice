@@ -4,7 +4,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { deleteBucket, updateBucket } from './redux/modules/bucket';
+import { deleteBucketFB, updateBucketFB } from './redux/modules/bucket';
 
 const Detail = (props) => {
     const dispatch = useDispatch();
@@ -20,15 +20,17 @@ const Detail = (props) => {
         <div>
             <h1>{bucket_list[bucket_index].text}</h1>
             <ButtonGroup>
+                
                 <Button 
                 style={{color: "blue"}}
                 onClick={() => {
-                    dispatch(deleteBucket(bucket_index)); // dispatch가 호출되면 리듀서함수를 실행시켜서 새로운 상태 만들어준다. 
+                    dispatch(deleteBucketFB(bucket_index)); // dispatch가 호출되면 리듀서함수를 실행시켜서 새로운 상태 만들어준다. 
                     props.history.goBack();
                 }}> 삭제하기
                 </Button>
+
                 <Button onClick={() => {
-                    dispatch(updateBucket(bucket_index));
+                    dispatch(updateBucketFB(bucket_index));
                     props.history.goBack();
                 }}> 완료하기
                 </Button>
