@@ -1,36 +1,72 @@
-import React from 'react';
-import { Text, Input, Grid, Button } from '../elements';
+import React from "react";
+import { Text, Input, Grid, Button } from "../elements";
 import { getCookie, setCookie, deleteCookie } from "../shared/Cookie";
 
-import { useDispatch } from 'react-redux'; // 액션을 쓰기위해서는 useDispatch import해놓고
-import { actionCreators as userActions } from '../redux/modules/user';
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { emailCheck } from "../shared/common";
 
 const Login = (props) => {
-   const dispatch = useDispatch(); // dispatch 만들어놓고 시작한다. 
+  const dispatch = useDispatch();
 
-   const login = () => {
-      // dispatch안에 액션생성함수 넣어줘야하니까 import해주자. 
-      dispatch(userActions.loginAction({user_name: 'perl'}));
-   };
+  const [id, setId] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
 
-   return (
-      <React.Fragment>
-         <Grid padding='16px' >
-            <Text size="32px" bold>로그인</Text>
-         </Grid>
-         <Grid padding='16px 0px' >
-            <Input placeholder='아이디를 입력해주세요'/>
-            <Input vplaceholder='패스워드를 입력해주세요'/>
-         </Grid>
-         <Button color='black' text='로그인하기' 
-         _onClick={()=>{
-            console.log('로그인했어');
+  const login = () => {
+
+    console.log(id);
+
+    if(id === "" || pwd === ""){
+      window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
+      return;
+    }
+
+    if(!emailCheck(id)){
+      window.alert("이메일 형식이 맞지 않습니다!");
+      return;
+    }
+
+    dispatch(userActions.loginFB(id, pwd));
+  };
+
+  return (
+    <React.Fragment>
+      <Grid padding="16px">
+        <Text size="32px" bold>
+          로그인
+        </Text>
+
+        <Grid padding="16px 0px">
+          <Input
+            label="아이디"
+            placeholder="아이디를 입력해주세요."
+            _onChange={(e) => {
+              setId(e.target.value);
+            }}
+          />
+        </Grid>
+
+        <Grid padding="16px 0px">
+          <Input
+            label="패스워드"
+            placeholder="패스워드 입력해주세요."
+            type="password"
+            _onChange={(e) => {
+              setPwd(e.target.value);
+            }}
+          />
+        </Grid>
+
+        <Button
+          text="로그인하기"
+          _onClick={() => {
+            console.log("로그인 했어!");
             login();
-         }}
-         >
-         </Button>
-      </React.Fragment>
-   )
-}
+          }}
+        ></Button>
+      </Grid>
+    </React.Fragment>
+  );
+};
 
 export default Login;
