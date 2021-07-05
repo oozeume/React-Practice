@@ -32,7 +32,6 @@ Grid.defaultProps = {
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: 100%;
-  ${(props)=>props.center ? `text-align: center;`: ''}
   box-sizing: border-box;
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -41,6 +40,7 @@ const GridBox = styled.div`
     props.is_flex
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
+  ${(props) => props.center? `text-align: center;`: ""}
 `;
 
 export default Grid;
