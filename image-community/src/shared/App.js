@@ -43,7 +43,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/write" exact component={PostWrite} />
-          <Route path="/write/:id" exact component={PostWrite} />
+          <Route path="/write/:id" exact component={PostWrite} /> {/* 수정페이지용 컴포넌트 */}
           <Route path="/post/:id" exact component={PostDetail} />
           <Route path="/search" exact component={Search} />
           <Route path="/noti" exact component={Notification} />

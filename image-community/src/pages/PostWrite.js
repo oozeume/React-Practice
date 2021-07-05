@@ -12,15 +12,20 @@ const PostWrite = (props) => {
   const preview = useSelector((state) => state.image.preview);
   const post_list = useSelector((state) => state.post.list);
 
-  const post_id = props.match.params.id;
+  const post_id = props.match.params.id; // 여기 들어온 아이디를 가지고 수정인지 아닌지 확인한다.
   const is_edit = post_id ? true : false;
 
   const { history } = props;
 
+  // post 데이터 가지고오는 것
+  // 이게 수정모드이니? 수정모드이면 post_list에서 찾는다.p.id가 post_id랑 똑같은지
   let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
+
+  console.log(_post);
 
   const [contents, setContents] = React.useState(_post ? _post.contents : "");
 
+  // 처음에 렌더링할때 한번만 체크하는 거로 useEffect 사용
   React.useEffect(() => {
     if (is_edit && !_post) {
       console.log("포스트 정보가 없어요!");

@@ -12,7 +12,7 @@ const EDIT_POST = "EDIT_POST";
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
-const editPost = createAction(EDIT_POST, (post_id, post) => ({
+const editPost = createAction(EDIT_POST, (post_id, post) => ({ //어떤거를 수정할지 알아야하니까 post_id필요로한다. 그리고 post 딕셔너리
   post_id,
   post,
 }));
@@ -40,7 +40,7 @@ const editPostFB = (post_id = null, post = {}) => {
       return;
     }
 
-    const _image = getState().image.preview;
+    const _image = getState().image.preview; // 이미지 있는지없는지 확인하기위해서 이미지 가져온다.
 
     const _post_idx = getState().post.list.findIndex((p) => p.id === post_id);
     const _post = getState().post.list[_post_idx];
@@ -49,7 +49,7 @@ const editPostFB = (post_id = null, post = {}) => {
 
     const postDB = firestore.collection("post");
 
-    if (_image === _post.image_url) {
+    if (_image === _post.image_url) { // preview에 있는 이미지랑 _post의 image_url이랑 같은지 확인
       postDB
         .doc(post_id)
         .update(post)

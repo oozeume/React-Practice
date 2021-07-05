@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Image, Text, Button } from "../elements";
 
-import {history} from "../redux/configureStore";
+import { history } from "../redux/configureStore";
 
- const Post = (props) => {
+const Post = (props) => {
   return (
     <React.Fragment>
       <Grid>
