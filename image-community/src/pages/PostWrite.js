@@ -3,10 +3,12 @@ import {Grid, Text, Button, Image, Input} from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch} from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostWrite = (props) => {
-
+    const dispatch = useDispatch();
     const is_login = useSelector((state)=> state.user.is_login);
+    const preview = useSelector((state) => state.image.preview);
 
     const {history} = props;
 
@@ -15,8 +17,10 @@ const PostWrite = (props) => {
     // 게시글 작성한거 넘겨주는 함수
     const changeContents = (e) => {
       setContents(e.target.value);
+    }
 
-      console.log(e.target.value);
+    const addPost = () => {
+      dispatch(postActions.addPostFb(contents));
     }
 
     if(!is_login){
@@ -45,7 +49,7 @@ const PostWrite = (props) => {
             </Text>
           </Grid>
 
-          <Image shape="rectangle" />
+          <Image shape="rectangle" src={preview ? preview: "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F995C434C5C07CDA015"} />
         </Grid>
 
         <Grid padding="16px">
@@ -53,7 +57,7 @@ const PostWrite = (props) => {
         </Grid>
 
         <Grid padding="16px">
-          <Button text="게시글 작성"></Button>
+          <Button text="게시글 작성" _onClick={addPost}></Button>
         </Grid>
       </React.Fragment>
     );
